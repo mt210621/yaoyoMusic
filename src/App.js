@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { memo } from 'react'
+import { renderRoutes } from 'react-router-config';
+import { Provider } from 'react-redux';
 
-function App() {
+import routes from './router'
+import store from './store';
+import HYAppPlayerBar from './pages/player/app-player-bar' 
+import HYAppHeader from '@/components/app-header';
+import HYAppFooter from '@/components/app-footer';
+import { HashRouter } from 'react-router-dom';
+
+export default memo(function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    <Provider store={store}>
+      <HashRouter>
+        <HYAppHeader/>
+        {renderRoutes(routes)}
+      <HYAppFooter/>
+      <HYAppPlayerBar/>
+    </HashRouter>
+    </Provider>
+    
+  )
+})
 
-export default App;
